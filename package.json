@@ -2,6 +2,10 @@
   "name": "docsstock",
   "version": "0.1.0",
   "private": true,
+  "engine": {
+    "node": "16.x",
+    "npm": ">=6.0.0"
+  }
   "scripts": {
     "dev": "next dev",
     "build": "next build",
