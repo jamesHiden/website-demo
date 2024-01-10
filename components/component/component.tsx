@@ -129,7 +129,7 @@ export function Component() {
 }
 
 
-function MenuIcon(props) {
+function MenuIcon(props:any) {
   return (
     <svg
       {...props}
@@ -151,7 +151,7 @@ function MenuIcon(props) {
 }
 
 
-function MoonIcon(props) {
+function MoonIcon(props:any) {
   return (
     <svg
       {...props}
@@ -171,7 +171,7 @@ function MoonIcon(props) {
 }
 
 
-function LinkIcon(props) {
+function LinkIcon(props:any) {
   return (
     <svg
       {...props}
@@ -192,7 +192,7 @@ function LinkIcon(props) {
 }
 
 
-function FileIcon(props) {
+function FileIcon(props:any) {
   return (
     <svg
       {...props}
@@ -213,7 +213,7 @@ function FileIcon(props) {
 }
 
 
-function EyeIcon(props) {
+function EyeIcon(props:any) {
   return (
     <svg
       {...props}
@@ -234,7 +234,7 @@ function EyeIcon(props) {
 }
 
 
-function CurvedlineChart(props) {
+function CurvedlineChart(props:any) {
   return (
     <div {...props}>
       <ResponsiveLine
