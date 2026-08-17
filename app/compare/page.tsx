@@ -1,7 +1,7 @@
 import { SiteHeader } from "@/components/site/site-header";
 import { formatAmount, formatPeriodLabel } from "@/lib/format";
 import { getCompanies, getCompanyBySymbol, getStandardStatements } from "@/lib/queries";
-import { STANDARD_LABELS, STATEMENT_ROW_ORDER, STATEMENT_TYPE_LABELS, SUBTOTAL_KEYS } from "@/lib/standardLabels";
+import { STANDARD_LABELS_FA, STATEMENT_ROW_ORDER, STATEMENT_TYPE_LABELS, SUBTOTAL_KEYS } from "@/lib/standardLabels";
 import type { StatementType } from "@/lib/queries";
 
 export const revalidate = 300;
@@ -43,14 +43,14 @@ export default async function ComparePage({
     <div className="min-h-screen bg-slate-50">
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-4 py-10">
-        <h1 className="text-2xl font-semibold text-slate-900">Compare Companies</h1>
+        <h1 className="text-2xl font-bold text-slate-900">مقایسه شرکت‌ها</h1>
         <p className="mt-1 text-sm text-slate-500">
-          Most recent reported period for each company, standardized side by side.
+          آخرین دوره‌ی گزارش‌شده‌ی هر شرکت، به‌صورت استاندارد و کنار هم.
         </p>
 
-        <form method="get" className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <label className="text-sm font-medium text-slate-700">Statement:</label>
+        <form method="get" className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <span className="text-sm font-semibold text-slate-700">نوع صورت مالی:</span>
             {SECTIONS.map((type) => (
               <label key={type} className="flex items-center gap-1.5 text-sm text-slate-600">
                 <input
@@ -75,36 +75,36 @@ export default async function ComparePage({
                   defaultChecked={selectedSymbols.includes(company.symbol)}
                   className="accent-slate-900"
                 />
-                <span dir="rtl">{company.symbol}</span>
+                <span>{company.symbol}</span>
               </label>
             ))}
           </div>
 
           <button
             type="submit"
-            className="mt-5 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+            className="mt-5 rounded-lg bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
           >
-            Compare
+            مقایسه کن
           </button>
         </form>
 
         {rows.length > 0 && (
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-5">
-            <h2 className="mb-4 text-lg font-semibold text-slate-900">
+          <section className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="mb-4 text-lg font-bold text-slate-900">
               {STATEMENT_TYPE_LABELS[statementType]}
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] border-collapse text-sm">
                 <thead>
                   <tr className="border-b border-slate-200">
-                    <th className="sticky left-0 bg-white py-2 pr-4 text-left font-medium text-slate-500">
-                      Line item
+                    <th className="sticky right-0 bg-white py-2 pl-4 text-right font-medium text-slate-500">
+                      سرفصل
                     </th>
                     {rows.map(({ company, latestPeriod }) => (
-                      <th key={company.id} className="whitespace-nowrap py-2 pl-4 text-right font-medium text-slate-500">
-                        <span dir="rtl">{company.symbol}</span>
-                        <div className="font-normal text-xs text-slate-400">
-                          {latestPeriod ? formatPeriodLabel(latestPeriod.periodEndDate) : "no data"}
+                      <th key={company.id} className="whitespace-nowrap py-2 pr-4 text-right font-medium text-slate-500">
+                        {company.symbol}
+                        <div className="text-xs font-normal text-slate-400">
+                          {latestPeriod ? formatPeriodLabel(latestPeriod.periodEndDate) : "بدون داده"}
                         </div>
                       </th>
                     ))}
@@ -122,9 +122,11 @@ export default async function ComparePage({
                             : "border-t border-slate-100 text-slate-700"
                         }
                       >
-                        <td className="sticky left-0 bg-white py-2 pr-4">{STANDARD_LABELS[key] ?? key}</td>
+                        <td className="sticky right-0 bg-white py-2 pl-4 text-right">
+                          {STANDARD_LABELS_FA[key] ?? key}
+                        </td>
                         {rows.map(({ company, latestPeriod }) => (
-                          <td key={company.id} className="whitespace-nowrap py-2 pl-4 text-right tabular-nums">
+                          <td key={company.id} className="whitespace-nowrap py-2 pr-4 text-right tabular-nums" dir="ltr">
                             {formatAmount(latestPeriod?.values[key])}
                           </td>
                         ))}

@@ -25,15 +25,13 @@ export default async function CompanyPage({
     <div className="min-h-screen bg-slate-50">
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-4 py-10">
-        <h1 className="text-2xl font-semibold text-slate-900" dir="rtl">
-          {company.symbol}
-        </h1>
+        <h1 className="text-2xl font-bold text-slate-900">{company.symbol}</h1>
         {company.industry && <p className="mt-1 text-sm text-slate-500">{company.industry}</p>}
 
         <div className="mt-8 space-y-10">
           {SECTIONS.map((statementType) => (
-            <section key={statementType} className="rounded-lg border border-slate-200 bg-white p-5">
-              <h2 className="mb-4 text-lg font-semibold text-slate-900">
+            <section key={statementType} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h2 className="mb-4 text-lg font-bold text-slate-900">
                 {STATEMENT_TYPE_LABELS[statementType]}
               </h2>
               <StatementTable

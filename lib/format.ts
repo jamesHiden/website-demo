@@ -1,3 +1,10 @@
+import { toJalaali } from "jalaali-js";
+
+const PERSIAN_MONTHS = [
+  "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+  "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند",
+];
+
 export function formatAmount(value: number | undefined): string {
   if (value === undefined || Number.isNaN(value)) return "—";
   const negative = value < 0;
@@ -6,11 +13,10 @@ export function formatAmount(value: number | undefined): string {
   return negative ? `(${formatted})` : formatted;
 }
 
+/** Iranian financial periods are defined on the Persian (Jalali) calendar;
+ * show dates that way even though they're stored as Gregorian in the DB. */
 export function formatPeriodLabel(isoDate: string): string {
-  return new Date(isoDate).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-    timeZone: "UTC",
-  });
+  const [year, month, day] = isoDate.split("-").map(Number);
+  const j = toJalaali(year, month, day);
+  return `${j.jd} ${PERSIAN_MONTHS[j.jm - 1]} ${j.jy}`;
 }

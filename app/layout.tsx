@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Vazirmatn } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const vazirmatn = Vazirmatn({ subsets: ['arabic', 'latin'] })
 
 export const metadata: Metadata = {
-  title: 'Codal Stocks',
-  description: 'Standardized, comparable financial statements for Tehran Stock Exchange companies.',
+  title: 'کدال‌استاکس',
+  description: 'صورت‌های مالی شرکت‌های بورسی، استانداردشده و قابل‌مقایسه — برگرفته از کدال.',
 }
 
 export default function RootLayout({
@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="fa" dir="rtl">
+      <body className={vazirmatn.className}>{children}</body>
     </html>
   )
 }
