@@ -60,7 +60,7 @@ export async function getStandardStatements(
     cash_flow: [],
   };
 
-  for (const group of groups.values()) {
+  for (const group of Array.from(groups.values())) {
     const best = pickBestFiling(group);
     const values: Record<string, number> = {};
     for (const item of best.standard_line_items) {
