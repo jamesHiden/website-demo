@@ -5,7 +5,7 @@ import { getCompanyBySymbol, getStandardStatements } from "@/lib/queries";
 import { STATEMENT_ROW_ORDER, STATEMENT_TYPE_LABELS } from "@/lib/standardLabels";
 import type { StatementType } from "@/lib/queries";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 const SECTIONS: StatementType[] = ["income_statement", "balance_sheet", "cash_flow"];
 

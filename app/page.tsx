@@ -2,7 +2,9 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site/site-header";
 import { getCompanies } from "@/lib/queries";
 
-export const revalidate = 300;
+// Render on request rather than prerendering at build time, so a deploy
+// never depends on reaching the database during the build step.
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const companies = await getCompanies();
